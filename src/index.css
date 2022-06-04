@@ -1,0 +1,75 @@
+@import url('/node_modules/bootstrap/dist/css/bootstrap.css');
+@import url('/node_modules/sweetalert2/dist/sweetalert2.css');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.fa-solid{
+  margin-top: -26px;
+  position: relative;
+  float: right;
+  margin-right: 15px;
+}
+
+ul {
+  list-style: none;
+};
+
+.card{
+  width: 80%;
+  margin-left: 120px;
+  color: rgb(18, 57, 139);
+}
+
+h4 {
+  text-align: center;
+}
+
+form {
+
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  margin: "32px auto 37px";
+  max-Width : "530px";
+  background-color : "#fff";
+  padding: "30px";
+  border-Radius: "10px";
+  box-Shadow: "0px 0px 10px 10px rgba(0,0,0,0.15)" ;
+}
+
+label,
+input {
+  display: block;
+  width: 100%;
+}
+
+label {
+  margin: 10px;
+  height: 22px;
+  
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #777;
+  
+}
+
+input.error {
+  border-color:red;
+}
