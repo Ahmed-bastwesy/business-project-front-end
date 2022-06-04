@@ -1,11 +1,16 @@
-import React, { useState , useEffect ,useRef}  from "react";
+import React, { useState , useEffect ,}  from "react";
 import validator from "validator";
 import Swal from 'sweetalert2';
 import { Card} from "react-bootstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../storage/action/actions";
 
 
 export default function Login() {
+  const user =useSelector((state)=>state.user.user);
+  const dispatch = useDispatch();
+  useDispatch
   const [errors,setErrors ]=useState([])
   const [userForm, setUserForm] = useState({
     email: "",
@@ -58,7 +63,9 @@ export default function Login() {
       axios.post("http://127.0.0.1:8000/api/login",formData)
       .then(function (response) {
         //handle success
-        console.log(response.status);
+        console.log(response.data.user);
+        dispatch(setUser(response.data.user))
+        
       }).catch(error => {
         if(error.response.data.errors){
             setUserFormErr(error.response.data.errors);
@@ -78,72 +85,73 @@ export default function Login() {
 };
 
   return (
-    <div>
-      <Card>
-        <Card.Header>
-          <h4>Login Form</h4>
-        </Card.Header>
-        <Card.Body>
-          <form onSubmit={(e) => submitForm(e)}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                email
-              </label>
-              <input
-                type="text"
-                className={`form-control ${
-                    userFormErr.emailErr ? "border-danger" : "" }`}
-                id="email"
-                aria-describedby="emailHelp"
-                value={userForm.email}
-                onChange={(e) => handleUserFormChange(e)}
-              />
-              {userFormErr.emailErr && (
-                <div id="emailHelp" className="form-text text-danger">
-                  {userFormErr.emailErr}
-                </div>
-              )}
-              {userFormErr.email && (
-                <div id="emailHelp" className="form-text text-danger">
-                  {userFormErr.email}
-                </div>
-              )}
-            </div>
+      <div>
+        <Card>
+          <Card.Header>
+            <h4>Login Form {user.name}</h4>
+            <img src={user.profileImg}></img>
+          </Card.Header>
+          <Card.Body>
+            <form onSubmit={(e) => submitForm(e)}>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  email
+                </label>
+                <input
+                  type="text"
+                  className={`form-control ${
+                      userFormErr.emailErr ? "border-danger" : "" }`}
+                  id="email"
+                  aria-describedby="emailHelp"
+                  value={userForm.email}
+                  onChange={(e) => handleUserFormChange(e)}
+                />
+                {userFormErr.emailErr && (
+                  <div id="emailHelp" className="form-text text-danger">
+                    {userFormErr.emailErr}
+                  </div>
+                )}
+                {userFormErr.email && (
+                  <div id="emailHelp" className="form-text text-danger">
+                    {userFormErr.email}
+                  </div>
+                )}
+              </div>
 
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                password
-              </label>
-              <input
-                type={passwordShown ? "text" : "password"}
-                className="form-control"
-                id="password"
-                aria-describedby="passwordHelp"
-                value={userForm.password}
-                onChange={(e) => handleUserFormChange(e)}
-              />{" "}
-              <i
-                className="fa-solid fa-eye-slash"
-                onClick={togglePassword}
-              ></i>
-              {userFormErr.passwordErr && (
-                <div id="passwordHelp" className="form-text text-danger">
-                  {userFormErr.passwordErr}
-                </div>
-              )}
-              {userFormErr.password && (
-                <div id="passwordHelp" className="form-text text-danger">
-                  {userFormErr.password}
-                </div>
-              )}
-            </div>
-            <button  className="btn btn-primary">
-              Login
-            </button> 
-          </form>
-        </Card.Body>
-      </Card>
-    </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  password
+                </label>
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  className="form-control"
+                  id="password"
+                  aria-describedby="passwordHelp"
+                  value={userForm.password}
+                  onChange={(e) => handleUserFormChange(e)}
+                />{" "}
+                <i
+                  className="fa-solid fa-eye-slash"
+                  onClick={togglePassword}
+                ></i>
+                {userFormErr.passwordErr && (
+                  <div id="passwordHelp" className="form-text text-danger">
+                    {userFormErr.passwordErr}
+                  </div>
+                )}
+                {userFormErr.password && (
+                  <div id="passwordHelp" className="form-text text-danger">
+                    {userFormErr.password}
+                  </div>
+                )}
+              </div>
+              <button  className="btn btn-primary">
+                Login
+              </button> 
+            </form>
+          </Card.Body>
+        </Card>
+      </div>
   );
 }
 
