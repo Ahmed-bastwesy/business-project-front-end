@@ -4,11 +4,16 @@ const initialState={
     user: {},
 }
 const userReducers=(state=initialState,action)=>{
-    if(action.type == "SetUser"){
-        return {...state , user: action.payload};
-    }
-    else{
-        return {...state , user: state.user};
+    switch (action.type) {
+        case "SetUser":
+            return {...state , user: action.payload};
+            break;
+        case "RemoveUser":
+            return {...state , user: {}};
+            break;
+        default:
+            return {...state , user: state.user};
+            break;
     }
 }
 

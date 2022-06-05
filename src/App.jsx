@@ -11,7 +11,6 @@ import Login from './components/Auth/login'
 import Home from './components/home'
 import PageNotFound from './components/PageNotFound';
 
-
 function App() {
   return (
     <div className="App">
