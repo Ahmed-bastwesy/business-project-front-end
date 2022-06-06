@@ -197,7 +197,7 @@ export default function Register() {
     formData.append("type", userForm.type);
 
     axios
-      .post("http://127.0.0.1:8000/api/register", formData)
+      .post(`${import.meta.env.VITE_SOME_API_URL}/api/register`, formData)
       .then(function (response) {
         //handle success
         console.log(response);

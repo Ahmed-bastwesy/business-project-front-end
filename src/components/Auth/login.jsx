@@ -4,11 +4,14 @@ import Swal from 'sweetalert2';
 import { Card} from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../storage/action/actions";
+import { setToken, setUser } from "../../storage/action/actions";
+import NavBar from "../layout/navbar";
+// import env from "react-dotenv";
 
 
 export default function Login() {
   const user =useSelector((state)=>state.user.user);
+  const token = useSelector((state)=>state.token.token);
   const dispatch = useDispatch();
   useDispatch
   const [errors,setErrors ]=useState([])
@@ -60,12 +63,13 @@ export default function Login() {
       const formData = new FormData();
       formData.append('email',userForm.email)
       formData.append('password',userForm.password)
-      axios.post("http://127.0.0.1:8000/api/login",formData)
+      axios.post(`${import.meta.env.VITE_SOME_API_URL}/api/login`,formData)
       .then(function (response) {
         //handle success
         console.log(response.data.user);
+      
         dispatch(setUser(response.data.user))
-        
+        dispatch(setToken(response.data.token))
       }).catch(error => {
         if(error.response.data.errors){
             setUserFormErr(error.response.data.errors);
@@ -86,10 +90,11 @@ export default function Login() {
 
   return (
       <div>
+        <NavBar/>
         <Card>
           <Card.Header>
-            <h4>Login Form {user.name}</h4>
-            <img src={user.profileImg}></img>
+            <h4>Login Form</h4>
+            
           </Card.Header>
           <Card.Body>
             <form onSubmit={(e) => submitForm(e)}>

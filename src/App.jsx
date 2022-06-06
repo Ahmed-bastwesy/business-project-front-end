@@ -14,7 +14,6 @@ import ProductsView from './components/product/ProductsView';
 import ClientCart from './components/cart/ClientCart';
 import ProductDetails from './components/product/ProductDetails';
 
-
 function App() {
   return (
     <div className="App">

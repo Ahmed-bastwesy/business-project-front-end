@@ -1,10 +1,9 @@
-import {combineReducers} from 'redux'
+import tokenReducers from './tokenReducer'
+import userReducers from './userReducer'
 
-// import counterReducers from './counterReducer'
-import userReducer from './userReducer'
+const reducers = {
+    user: userReducers,
+    token: tokenReducers,
+}
 
-
-export default combineReducers({
-    // counter: counterReducers,
-    user: userReducer,
-})
+export default reducers
