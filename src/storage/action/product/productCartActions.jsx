@@ -15,8 +15,8 @@ export const getProducts = () => async (dispatch) => {
 
 export const addProduct = (id) => async (dispatch) => {
     try {
-        await addProductToCard(id);
-        
+        // await addProductToCard(id);
+        console.log(id);
         dispatch({ type: ADD_TO_CART, payload: id });
     } catch (error) {
         console.log(error.message);

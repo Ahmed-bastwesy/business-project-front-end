@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import {addProduct,deleteProduct} from "../../storage/action/product/productCartActions"
 function ProductCard({product}) {
+    const dispatch = useDispatch()
 
 
 const addProductToCart= ()=>{
-    //send data to user cart
+    console.log(product.id);
+    dispatch(addProduct(product.id))
 }
 
 const removeProductFromCart= ()=>{
-    //send data to user cart
+    dispatch(deleteProduct(product.id))
 }
   return (
 
