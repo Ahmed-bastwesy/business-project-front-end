@@ -1,18 +1,14 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL,ADD_TO_CART,REMOVE_FROM_CART} from '../../action/product/types';
 
-export default (posts = [], action) => {
+export default (cartProducts = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
       return action.payload;
-    case LIKE:
-      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
-    case CREATE:
-      return [...posts, action.payload];
-    case UPDATE:
-      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
-    case DELETE:
-      return posts.filter((post) => post._id !== action.payload);
+    case ADD_TO_CART:
+        return [...cartProducts,action.payload]
+    case REMOVE_FROM_CART:
+      return cartProducts.filter((cartProduct) => cartProduct !== action.payload);
     default:
-      return posts;
+      return cartProducts;
   }
 };
